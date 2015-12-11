@@ -47,7 +47,7 @@ install_pkgs()
         pkgs="$pkgs nfs-kernel-server"
     fi
 
-    zypper -n install $pkgs
+    yum -n install $pkgs
 }
 
 # Partitions all data disks attached to the VM and creates
