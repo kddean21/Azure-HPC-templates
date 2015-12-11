@@ -158,3 +158,9 @@ install_pkgs
 setup_shares
 setup_hpc_user
 setup_env
+
+yum -y install nmap
+nmap -P0 -p 1999,2099 flex.cd-adapco.com
+
+
+
