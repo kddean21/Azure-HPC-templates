@@ -23,19 +23,6 @@ LAST_WORKER_INDEX=$(($WORKER_COUNT - 1))
 SHARE_HOME=/share/home
 SHARE_DATA=/share/data
 
-# Munged
-MUNGE_USER=munge
-MUNGE_GROUP=munge
-MUNGE_VERSION=0.5.11
-
-# SLURM
-SLURM_USER=slurm
-SLURM_UID=6006
-SLURM_GROUP=slurm
-SLURM_GID=6006
-SLURM_VERSION=15-08-1-1
-SLURM_CONF_DIR=$SHARE_DATA/conf
-
 # Hpc User
 HPC_USER=$4
 HPC_UID=7007
@@ -48,26 +35,6 @@ is_master()
 {
     hostname | grep "$MASTER_HOSTNAME"
     return $?
-}
-
-# Add the SLES 12 SDK repository which includes all the
-# packages for compilers and headers.
-#
-add_sdk_repo()
-{
-    repoFile="/etc/zypp/repos.d/SMT-http_smt-azure_susecloud_net:SLE-SDK12-Pool.repo"
-	
-    if [ -e "$repoFile" ]; then
-        echo "SLES 12 SDK Repository already installed"
-        return 0
-    fi
-	
-	wget $TEMPLATE_BASE_URL/sles12sdk.repo
-	
-	cp sles12sdk.repo "$repoFile"
-
-    # init new repo
-    zypper -n search nfs > /dev/null 2>&1
 }
 
 # Installs all required packages.
@@ -143,103 +110,6 @@ setup_shares()
     fi
 }
 
-# Downloads/builds/installs munged on the node.  
-# The munge key is generated on the master node and placed 
-# in the data share.  
-# Worker nodes copy the existing key from the data share.
-#
-install_munge()
-{
-    groupadd $MUNGE_GROUP
-
-    useradd -M -c "Munge service account" -g munge -s /usr/sbin/nologin munge
-
-    wget https://github.com/dun/munge/archive/munge-0.5.11.tar.gz
-
-    tar xvfz munge-$MUNGE_VERSION.tar.gz
-
-    cd munge-munge-$MUNGE_VERSION
-
-    mkdir -m 700 /etc/munge
-    mkdir -m 711 /var/lib/munge
-    mkdir -m 700 /var/log/munge
-    mkdir -m 755 /var/run/munge
-
-    ./configure -libdir=/usr/lib64 --prefix=/usr --sysconfdir=/etc --localstatedir=/var && make && make install
-
-    chown -R munge:munge /etc/munge /var/lib/munge /var/log/munge /var/run/munge
-
-    if is_master; then
-        dd if=/dev/urandom bs=1 count=1024 > /etc/munge/munge.key
-		mkdir -p $SLURM_CONF_DIR
-        cp /etc/munge/munge.key $SLURM_CONF_DIR
-    else
-        cp $SLURM_CONF_DIR/munge.key /etc/munge/munge.key
-    fi
-
-    chown munge:munge /etc/munge/munge.key
-    chmod 0400 /etc/munge/munge.key
-
-    /etc/init.d/munge start
-
-    cd ..
-}
-
-# Installs and configures slurm.conf on the node.
-# This is generated on the master node and placed in the data
-# share.  All nodes create a sym link to the SLURM conf
-# as all SLURM nodes must share a common config file.
-#
-install_slurm_config()
-{
-    if is_master; then
-
-        mkdir -p $SLURM_CONF_DIR
-
-	    wget "$TEMPLATE_BASE_URL/slurm.template.conf"
-
-		cat slurm.template.conf |
-		        sed 's/__MASTER__/'"$MASTER_HOSTNAME"'/g' |
-				sed 's/__WORKER_HOSTNAME_PREFIX__/'"$WORKER_HOSTNAME_PREFIX"'/g' |
-				sed 's/__LAST_WORKER_INDEX__/'"$LAST_WORKER_INDEX"'/g' > $SLURM_CONF_DIR/slurm.conf
-    fi
-
-    ln -s $SLURM_CONF_DIR/slurm.conf /etc/slurm/slurm.conf
-}
-
-# Downloads, builds and installs SLURM on the node.
-# Starts the SLURM control daemon on the master node and
-# the agent on worker nodes.
-#
-install_slurm()
-{
-    groupadd -g $SLURM_GID $SLURM_GROUP
-
-    useradd -M -u $SLURM_UID -c "SLURM service account" -g $SLURM_GROUP -s /usr/sbin/nologin $SLURM_USER
-
-    mkdir /etc/slurm /var/spool/slurmd /var/run/slurmd /var/run/slurmctld /var/log/slurmd /var/log/slurmctld
-
-    chown -R slurm:slurm /var/spool/slurmd /var/run/slurmd /var/run/slurmctld /var/log/slurmd /var/log/slurmctld
-
-    wget https://github.com/SchedMD/slurm/archive/slurm-$SLURM_VERSION.tar.gz
-
-    tar xvfz slurm-$SLURM_VERSION.tar.gz
-
-    cd slurm-slurm-$SLURM_VERSION
-	
-    ./configure -libdir=/usr/lib64 --prefix=/usr --sysconfdir=/etc/slurm && make && make install
-
-    install_slurm_config
-
-    if is_master; then
-        /usr/sbin/slurmctld -vvvv
-    else
-        /usr/sbin/slurmd -vvvv
-    fi
-
-    cd ..
-}
-
 # Adds a common HPC user to the node and configures public key SSh auth.
 # The HPC user has a shared home directory (NFS share on master) and access
 # to the data share.
@@ -284,10 +154,7 @@ setup_env()
 	echo "export I_MPI_DYNAMIC_CONNECTION=0" >> /etc/profile.d/hpc.sh
 }
 
-add_sdk_repo
 install_pkgs
 setup_shares
 setup_hpc_user
-install_munge
-install_slurm
 setup_env
