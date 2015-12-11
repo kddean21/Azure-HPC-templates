@@ -12,6 +12,8 @@ if [ $# != 5 ]; then
     exit 1
 fi
 
+yum -y install mdadm
+
 # Set user args
 MASTER_HOSTNAME=$1
 WORKER_HOSTNAME_PREFIX=$2
