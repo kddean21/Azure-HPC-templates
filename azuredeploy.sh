@@ -47,7 +47,7 @@ install_pkgs()
         pkgs="$pkgs nfs-kernel-server"
     fi
 
-    yum -n install $pkgs
+    yum -y install $pkgs
 }
 
 # Partitions all data disks attached to the VM and creates
