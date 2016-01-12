@@ -420,6 +420,7 @@
             "caching": "ReadWrite", 
             "createOption": "Empty" 
             }
+          ]
         },
         "networkProfile": {
           "networkInterfaces": [
