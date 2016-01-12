@@ -81,7 +81,7 @@
     },
     "deploymentType": {
       "type": "string",
-      "defaultValue": "VMSS",
+      "defaultValue": "SingleAV",
       "allowedValues": [
         "VMSS",
         "Single",
