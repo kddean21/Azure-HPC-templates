@@ -136,9 +136,9 @@
     "subnetPrefix": "10.0.0.0/21",
     "storageAccountType": "Standard_LRS",
     "location": "[resourceGroup().location]",
-    "transferImagePublisher": "Canonical",
-    "transferImageOffer": "UbuntuServer",
-    "ubuntuOSVersion": "15.10",
+    "transferImagePublisher": "OpenLogic",
+    "transferImageOffer": "CentOS",
+    "transferOSVersion": "7.1",
     "imagePieces": "[split(parameters('imageLocation'),'/')]",
     "blobName": "[variables('imagePieces')[sub(length(variables('imagePieces')),1)]]",
 
@@ -241,7 +241,7 @@
           "imageReference": {
             "publisher": "[variables('transferImagePublisher')]",
             "offer": "[variables('transferImageOffer')]",
-            "sku": "[variables('ubuntuOSVersion')]",
+            "sku": "[variables('transferOSVersion')]",
             "version": "latest"
           },
           "osDisk": {
