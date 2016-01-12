@@ -3,9 +3,11 @@
 [[ -z "$HOME" || ! -d "$HOME" ]] && { echo 'fixing $HOME'; HOME=/root; } 
 export HOME 
 
-apt-get -y update
-apt-get -y install python3-pip libssl-dev libffi-dev npm  
-pip3 install blobxfer --upgrade  
+# apt-get -y update
+# apt-get -y install python3-pip libssl-dev libffi-dev npm
+yum -y update
+yum -y install epel-release gcc libffi-devel openssl-devel python-devel python-pip 
+pip install blobxfer --upgrade  
 blobxfer --version  
 
 ln -s /usr/bin/nodejs /usr/bin/node
