@@ -166,8 +166,7 @@
     "downloadScriptURI": "[concat(variables('templateLocation'), 'download.sh')]",
     "uploadTemplateURI": "[concat(variables('templateLocation'), 'upload.json')]",
     "uploadScriptURI": "[concat(variables('templateLocation'), 'upload.sh')]",
-    "confignfsTemplateURI": "[concat(variables('templateLocation'), 'confignfs.json')]",
-    "confignfsScriptURI": "[concat(variables('templateLocation'), 'confignfs.sh')]"
+    "finaldeployScriptURI": "[concat(variables('templateLocation'), 'finaldeploy.sh')]"
   },
   "resources": [
     {
@@ -521,6 +520,9 @@
           "subnetPrefix": { "value": "[variables('subnetPrefix')]" },
           "templateLocation": { "value": "[variables('templateLocation')]" },
           "location": { "value": "[variables('location')]" },
+          "masterHostName": { "value": "[concat('transfer', parameters('uniquePrefix'), 'vm')]" },
+          "hpcUserName": { "value": "[parameters('hpcUserName')]" },
+          "finaldeployScripURI": { "value": "[variables('finaldeployScriptURI')]" },
           "adminUsername": { "value": "[parameters('adminUsername')]" },
           "adminPassword": { "value": "[parameters('adminPassword')]" }
         }
