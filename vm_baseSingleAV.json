@@ -38,7 +38,7 @@
     "masterHostName": {
       "type": "string"
     },
-    "fianldeployScriptURI": {
+    "finaldeployScriptURI": {
       "type": "string"
     },
     "adminUsername": {
