@@ -8,11 +8,11 @@
     "uniquePrefix": {
       "type": "string"
     },
-    "imageLocation": {
+    "masterHostName": {
       "type": "string"
     },
-    "storageAccountKey": {
-      "type": "securestring"
+    "hpcUserName": {
+      "type": "string"
     },
     "confignfsScriptURI": {
       "type": "string"
