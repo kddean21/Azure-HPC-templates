@@ -463,6 +463,8 @@
           "location": { "value": "[variables('location')]" },
           "uniquePrefix": { "value": "[parameters('uniquePrefix')]" },
           "imageLocation": { "value": "[parameters('imageLocation')]" },
+          "masterHostName": { "value": "[concat('transfer', parameters('uniquePrefix'), 'vm')]" },
+          "hpcUserName": { "value": "[parameters('hpcUserName')]" },
           "storageAccountKey": { "value": "[parameters('storageAccountKey')]" },
           "downloadScriptURI": { "value": "[variables('downloadScriptURI')]" }
         }
@@ -490,28 +492,6 @@
           "uniquePrefix": { "value": "[parameters('uniquePrefix')]" },
           "index": { "value": "[copyIndex()]" },
           "uploadScriptURI": { "value": "[variables('uploadScriptURI')]" }
-        }
-      }
-    },
-     {
-      "name": "[concat(parameters('uniquePrefix'), 'confignfs')]",
-      "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2015-01-01",
-      "dependsOn": [
-        "[concat('Microsoft.Resources/deployments/', parameters('uniquePrefix'), 'script0')]"
-      ],
-      "properties": {
-        "mode": "Incremental",
-        "templateLink": {
-          "uri": "[variables('confignfsTemplateURI')]",
-          "contentVersion": "1.0.0.0"
-        },
-        "parameters": {
-          "location": { "value": "[variables('location')]" },
-          "uniquePrefix": { "value": "[parameters('uniquePrefix')]" },
-          "hpcUserName": { "value": "[parameters('hpcUserName')]" },
-          "masterHostName": { "value": "[concat('transfer', parameters('uniquePrefix'), 'vm')]" },
-          "confignfsScriptURI": { "value": "[variables('confignfsScriptURI')]" }
         }
       }
     },
