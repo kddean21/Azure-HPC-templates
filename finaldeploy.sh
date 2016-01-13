@@ -1,12 +1,14 @@
 #!/bin/bash
 
+MASTER_HOSTNAME=$1
+
 # Shares
 SHARE_HOME=/share/home
 SHARE_DATA=/share/data
 
 
 # Hpc User
-HPC_USER=$1
+HPC_USER=$2
 HPC_UID=7007
 HPC_GROUP=hpc
 HPC_GID=7007
@@ -27,11 +29,11 @@ setup_shares()
     mkdir -p $SHARE_DATA
 
    
-        echo "master:$SHARE_HOME $SHARE_HOME    nfs4    rw,auto,_netdev 0 0" >> /etc/fstab
-        echo "master:$SHARE_DATA $SHARE_DATA    nfs4    rw,auto,_netdev 0 0" >> /etc/fstab
+        echo "$MASTER_HOSTNAME:$SHARE_HOME $SHARE_HOME    nfs4    rw,auto,_netdev 0 0" >> /etc/fstab
+        echo "$MASTER_HOSTNAME:$SHARE_DATA $SHARE_DATA    nfs4    rw,auto,_netdev 0 0" >> /etc/fstab
         mount -a
-        mount | grep "^master:$SHARE_HOME"
-        mount | grep "^master:$SHARE_DATA"
+        mount | grep "^$MASTER_HOSTNAME:$SHARE_HOME"
+        mount | grep "^$MASTER_HOSTNAME:$SHARE_DATA"
 
 }
 
