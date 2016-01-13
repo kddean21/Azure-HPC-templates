@@ -8,14 +8,13 @@ if [[ $(id -u) -ne 0 ]] ; then
     exit 1
 fi
 
-if [ $# != 3 ]; then
-    echo "Usage: $0 <MasterHostname> <HPCUserName> <TemplateBaseUrl>"
+if [ $# != 2 ]; then
+    echo "Usage: $0 <MasterHostname> <HPCUserName> "
     exit 1
 fi
 
 # Set user args
 MASTER_HOSTNAME=$1
-TEMPLATE_BASE_URL="$3"
 
 # Shares
 SHARE_HOME=/share/home
