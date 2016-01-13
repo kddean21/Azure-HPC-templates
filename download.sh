@@ -73,7 +73,7 @@ install_pkgs()
 #
 setup_data_disks()
 {
-    mountPoint="$3"
+    mountPoint="$1"
     createdPartitions=""
 
     # Loop through and partition disks until not found
