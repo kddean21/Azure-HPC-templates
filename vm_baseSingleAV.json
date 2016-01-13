@@ -92,10 +92,9 @@
         "type": "CustomScriptForLinux",
         "typeHandlerVersion": "1.3",
         "settings": {
-          "fileUris": [
-            "[concat(variables('templateBaseUrl'), 'azuredeploy.sh')]"
-          ],
-          "commandToExecute": "[variables('installationCLI')]"
+          "fileUris": [ "[parameters('finaldeployScriptURI')]"
+           ],
+          "commandToExecute": "[concat('bash finaldeply.sh', parameters('masterHostName'),' ', parameters('hpcUserName'))]"
         }
       }
     },
