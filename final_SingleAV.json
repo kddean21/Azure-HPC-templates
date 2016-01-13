@@ -41,6 +41,15 @@
     "adminUsername": {
       "type": "string"
     },
+    "masterHostName": {
+      "type": "string"
+    },
+    "hpcUserName": {
+      "type": "string"
+    },
+    "finaldeployScriptURI": {
+      "type": "string"
+    },
     "adminPassword": {
       "type": "securestring"
     }
@@ -85,6 +94,9 @@
           "vnetName": { "value": "[parameters('vnetName')]" },
           "subnetName": { "value": "[parameters('subnetName')]" },
           "location": { "value": "[parameters('location')]" },
+          "masterHostName": { "value": "[parameters('masterHostName')]" },
+          "hpcUserName": { "value": "[parameters('hpcUserName')]" },
+          "finaldeployScriptURI": { "value": "[parameters('finaldeployScriptURI')]" },
           "adminUsername": { "value": "[parameters('adminUsername')]" },
           "adminPassword": { "value": "[parameters('adminPassword')]" }
         }
