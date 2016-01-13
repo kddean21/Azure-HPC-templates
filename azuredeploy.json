@@ -158,7 +158,9 @@
     "downloadTemplateURI": "[concat(variables('templateLocation'), 'download.json')]",
     "downloadScriptURI": "[concat(variables('templateLocation'), 'download.sh')]",
     "uploadTemplateURI": "[concat(variables('templateLocation'), 'upload.json')]",
-    "uploadScriptURI": "[concat(variables('templateLocation'), 'upload.sh')]"
+    "uploadScriptURI": "[concat(variables('templateLocation'), 'upload.sh')]",
+    "confignfsTemplateURI": "[concat(variables('templateLocation'), 'confignfs.json')]",
+    "confignfsScriptURI": "[concat(variables('templateLocation'), 'confignfs.sh')]"
   },
   "resources": [
     {
@@ -489,19 +491,18 @@
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
       "dependsOn": [
-        "[concat('Microsoft.Resources/deployments/', parameters('uniquePrefix'), 'script', copyIndex())]"
+        "[concat('Microsoft.Resources/deployments/', parameters('uniquePrefix'), 'script', string(add(copyIndex(), 1)))]"
       ],
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "[variables('uploadTemplateURI')]",
+          "uri": "[variables('confignfsTemplateURI')]",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
           "location": { "value": "[variables('location')]" },
           "uniquePrefix": { "value": "[parameters('uniquePrefix')]" },
-          "index": { "value": "[copyIndex()]" },
-          "uploadScriptURI": { "value": "[variables('uploadScriptURI')]" }
+          "confignfsScriptURI": { "value": "[variables('confignfsScriptURI')]" }
         }
       }
     },
