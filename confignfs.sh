@@ -8,17 +8,14 @@ if [[ $(id -u) -ne 0 ]] ; then
     exit 1
 fi
 
-if [ $# != 5 ]; then
-    echo "Usage: $0 <MasterHostname> <WorkerHostnamePrefix> <WorkerNodeCount> <HPCUserName> <TemplateBaseUrl>"
+if [ $# != 3 ]; then
+    echo "Usage: $0 <MasterHostname> <HPCUserName> <TemplateBaseUrl>"
     exit 1
 fi
 
 # Set user args
 MASTER_HOSTNAME=$1
-WORKER_HOSTNAME_PREFIX=$2
-WORKER_COUNT=$3
-TEMPLATE_BASE_URL="$5"
-LAST_WORKER_INDEX=$(($WORKER_COUNT - 1))
+TEMPLATE_BASE_URL="$3"
 
 # Shares
 SHARE_HOME=/share/home
@@ -26,7 +23,7 @@ SHARE_DATA=/share/data
 
 
 # Hpc User
-HPC_USER=$4
+HPC_USER=$2
 HPC_UID=7007
 HPC_GROUP=hpc
 HPC_GID=7007
