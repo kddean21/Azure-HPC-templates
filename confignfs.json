@@ -14,7 +14,7 @@
     "storageAccountKey": {
       "type": "securestring"
     },
-    "downloadScriptURI": {
+    "confignfsScriptURI": {
       "type": "string"
     }
   },
@@ -30,15 +30,13 @@
         "typeHandlerVersion": "1.4",
         "settings": {
           "fileUris": [
-            "[parameters('downloadScriptURI')]"
+            "[parameters('confignfsScriptURI')]"
           ]
         },
         "protectedSettings": {
-          "commandToExecute": "[concat('bash download.sh ', parameters('imageLocation'),' ', parameters('storageAccountKey'))]"
+          "commandToExecute": "[concat('bash confignfs.sh ', parameters('imageLocation'),' ', parameters('storageAccountKey'))]"
         }
       }
     }
   ]
 }
-
-
