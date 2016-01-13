@@ -522,7 +522,7 @@
           "location": { "value": "[variables('location')]" },
           "masterHostName": { "value": "[concat('transfer', parameters('uniquePrefix'), 'vm')]" },
           "hpcUserName": { "value": "[parameters('hpcUserName')]" },
-          "finaldeployScripURI": { "value": "[variables('finaldeployScriptURI')]" },
+          "finaldeployScriptURI": { "value": "[variables('finaldeployScriptURI')]" },
           "adminUsername": { "value": "[parameters('adminUsername')]" },
           "adminPassword": { "value": "[parameters('adminPassword')]" }
         }
