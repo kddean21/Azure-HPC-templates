@@ -11,6 +11,12 @@
     "imageLocation": {
       "type": "string"
     },
+    "masterHostName": {
+      "type": "string"
+    },
+    "hpcUserName": {
+      "type": "string"
+    },
     "storageAccountKey": {
       "type": "securestring"
     },
@@ -34,7 +40,7 @@
           ]
         },
         "protectedSettings": {
-          "commandToExecute": "[concat('bash download.sh ', parameters('imageLocation'),' ', parameters('storageAccountKey'))]"
+          "commandToExecute": "[concat('bash download.sh ', parameters('imageLocation'),' ', parameters('storageAccountKey'),' ', parameters('masterHostName'),' ', parameters('hpcUserName'))]"
         }
       }
     }
