@@ -27,14 +27,14 @@ echo $container_name
 echo $blob_name    
 echo "$container_name,$blob_name" > /mnt/resource/config.txt  
 
-attempts=0
-response=1
-while [ $response -ne 0 -a $attempts -lt 5 ]
-do
-  blobxfer $sa_name $container_name /mnt/resource/ --remoteresource $blob_name --storageaccountkey $2 --download --no-computefilemd5
-  response=$?
-  attempts=$((attempts+1))
-done
+#attempts=0
+#response=1
+#while [ $response -ne 0 -a $attempts -lt 5 ]
+#do
+#  blobxfer $sa_name $container_name /mnt/resource/ --remoteresource $blob_name --storageaccountkey $2 --download --no-computefilemd5
+#  response=$?
+#  attempts=$((attempts+1))
+#done
 
 
 
