@@ -34,7 +34,7 @@
           ]
         },
         "protectedSettings": {
-          "commandToExecute": "[concat('bash confignfs.sh ', parameters('imageLocation'),' ', parameters('storageAccountKey'))]"
+          "commandToExecute": "[concat('bash confignfs.sh ', parameters('masterHostName'),' ', parameters('hpcUserName'))]"
         }
       }
     }
