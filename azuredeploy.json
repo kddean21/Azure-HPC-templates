@@ -484,6 +484,27 @@
         }
       }
     },
+     {
+      "name": "[concat(parameters('uniquePrefix'), 'confignfs')]",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2015-01-01",
+      "dependsOn": [
+        "[concat('Microsoft.Resources/deployments/', parameters('uniquePrefix'), 'script', copyIndex())]"
+      ],
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[variables('uploadTemplateURI')]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "location": { "value": "[variables('location')]" },
+          "uniquePrefix": { "value": "[parameters('uniquePrefix')]" },
+          "index": { "value": "[copyIndex()]" },
+          "uploadScriptURI": { "value": "[variables('uploadScriptURI')]" }
+        }
+      }
+    },
     {
       "name": "[concat(parameters('uniquePrefix'), 'full')]",
       "type": "Microsoft.Resources/deployments",
