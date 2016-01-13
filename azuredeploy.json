@@ -128,6 +128,13 @@
         "description": "Admin password for the VMs in the deployment."
       }
     },
+    "hpcUserName": {
+      "type": "string",
+      "defaultValue": "hpc",
+      "metadata": {
+        "description": "User for running HPC applications with shared home directory and SSH public key authentication setup.  This user cannot login from outside the cluster. Pick a valid username otherwise there will be a BadRequest error."
+      }
+    },
     "dataDiskSize": {
       "type": "int",
       "defaultValue": 128,
@@ -502,6 +509,8 @@
         "parameters": {
           "location": { "value": "[variables('location')]" },
           "uniquePrefix": { "value": "[parameters('uniquePrefix')]" },
+          "hpcUserName": { "value": "[parameters('hpcUserName')]" },
+          "masterHostName": { "value": "[concat('transfer', parameters('uniquePrefix'), 'vm')]" },
           "confignfsScriptURI": { "value": "[variables('confignfsScriptURI')]" }
         }
       }
