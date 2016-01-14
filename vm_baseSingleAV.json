@@ -78,7 +78,7 @@
     {
       "apiVersion": "[variables('armApiVersion')]",
       "type": "Microsoft.Compute/virtualMachines/extensions",
-      "name": "[concat('vm', parameters('clusterName'), padLeft(copyIndex(), 2, '0') '/Installation')]",
+      "name": "[concat('vm', parameters('clusterName'), padLeft(copyIndex(), 2, '0'), '/Installation')]",
       "location": "[resourceGroup().location]",
       "dependsOn": [
 	            "[concat('Microsoft.Compute/virtualMachines/', 'vm', parameters('clusterName'), padLeft(copyIndex(), 2, '0'))]"
@@ -90,7 +90,7 @@
       "properties": {
         "publisher": "Microsoft.OSTCExtensions",
         "type": "CustomScriptForLinux",
-        "typeHandlerVersion": "1.3",
+        "typeHandlerVersion": "1.4",
         "settings": {
           "fileUris": [ "[parameters('finaldeployScriptURI')]"
            ],
