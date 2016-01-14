@@ -78,7 +78,7 @@
     {
       "apiVersion": "[variables('armApiVersion')]",
       "type": "Microsoft.Compute/virtualMachines/extensions",
-      "name": "[concat(variables('workerVMName'), copyindex(), '/Installation')]",
+      "name": "[concat('vm', parameters('clusterName'), padLeft(copyIndex(), 2, '0') '/Installation')]",
       "location": "[resourceGroup().location]",
       "dependsOn": [
 	            "[concat('Microsoft.Compute/virtualMachines/', 'vm', parameters('clusterName'), padLeft(copyIndex(), 2, '0'))]"
