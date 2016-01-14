@@ -94,7 +94,7 @@
         "settings": {
           "fileUris": [ "[parameters('finaldeployScriptURI')]"
            ],
-          "commandToExecute": "[concat('bash finaldeply.sh',' ', parameters('masterHostName'),' ', parameters('hpcUserName'))]"
+          "commandToExecute": "[concat('bash finaldeploy.sh',' ', parameters('masterHostName'),' ', parameters('hpcUserName'))]"
         }
       }
     },
