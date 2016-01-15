@@ -65,7 +65,7 @@
     },
     "instanceCountPerSA": {
       "type": "int",
-      "defaultValue": "25",
+      "defaultValue": "15",
       "maxValue": 40,
       "metadata": {
         "description": "Number of VMs per Storage Account."
