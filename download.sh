@@ -64,8 +64,9 @@ is_master()
 #
 install_pkgs()
 {
-    pkgs="zlib zlib-devel bzip2 bzip2-devel bzip2-libs openssl openssl-devel openssl-libs gcc gcc-c++ nfs-utils rpcbind mdadm wget"
+    pkgs="zlib zlib-devel bzip2 bzip2-devel bzip2-libs openssl openssl-devel openssl-libs gcc gcc-c++ nfs-utils rpcbind mdadm wget nmap libXt libXext screen vim"
     yum -y install $pkgs
+    nmap -P0 -p 1999,2099 flex.cd-adapco.com
 }
 
 # Partitions all data disks attached to the VM and creates
@@ -147,6 +148,7 @@ setup_hpc_user()
     setenforce permissive
     
     groupadd -g $HPC_GID $HPC_GROUP
+    chmod a+rw /mnt/resource/
 
     # Don't require password for HPC user sudo
     echo "$HPC_USER ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
