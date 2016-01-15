@@ -148,7 +148,7 @@ setup_hpc_user()
     setenforce permissive
     
     groupadd -g $HPC_GID $HPC_GROUP
-    chmod a+rw /mnt/resource/
+    chmod -R a+rw /mnt/resource/
 
     # Don't require password for HPC user sudo
     echo "$HPC_USER ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
