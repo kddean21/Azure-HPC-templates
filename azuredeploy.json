@@ -4,6 +4,7 @@
   "parameters": {
     "uniquePrefix": {
       "type": "string",
+      "defaultValue": "CFD",
       "metadata": {
         "description": "This unique prefix will be used on all the objects created as part of this template."
       }
@@ -12,8 +13,6 @@
       "type": "string",
       "defaultValue": "Standard_D14",
       "allowedValues": [
-        "Standard_A4",
-        "Standard_A7",
         "Standard_D4",
         "Standard_D14"
       ],
@@ -25,44 +24,10 @@
       "type": "string",
       "defaultValue": "Standard_A9",
       "allowedValues": [
-        "Standard_A1",
-        "Standard_A2",
-        "Standard_A3",
-        "Standard_A4",
-        "Standard_A5",
-        "Standard_A6",
-        "Standard_A7",
         "Standard_A8",
         "Standard_A9",
         "Standard_A10",
-        "Standard_A11",
-        "Standard_D1",
-        "Standard_D2",
-        "Standard_D3",
-        "Standard_D3_v2",
-        "Standard_D4",
-        "Standard_D4_v2",
-        "Standard_D5_v2",
-        "Standard_D11",
-        "Standard_D12",
-        "Standard_D12_v2",
-        "Standard_D13",
-        "Standard_D13_v2",
-        "Standard_D14",
-        "Standard_D14_v2",
-        "Standard_DS3",
-        "Standard_DS4",
-        "Standard_DS12",
-        "Standard_DS13",
-        "Standard_DS14",
-        "Standard_G2",
-        "Standard_G3",
-        "Standard_G4",
-        "Standard_G5",
-        "Standard_GS2",
-        "Standard_GS3",
-        "Standard_GS4",
-        "Standard_GS5"
+        "Standard_A11"
       ],
       "metadata": {
         "description": "Size of the VMs to be used for actual computation."
@@ -93,12 +58,14 @@
     },
     "numberOfSAs": {
       "type": "int",
+      "defaultValue": "4",
       "metadata": {
         "description": "Number of Storage Accounts to upload the custom image to."
       }
     },
     "instanceCountPerSA": {
       "type": "int",
+      "defaultValue": "25",
       "maxValue": 40,
       "metadata": {
         "description": "Number of VMs per Storage Account."
@@ -106,24 +73,28 @@
     },
     "imageLocation": {
       "type": "string",
+      "defaultValue": "https://cfdgroup2199.blob.core.windows.net/vhds/20150826185255-00853603622-centos71-rdma-os1.vhd",
       "metadata": {
         "description": "URL of the base custom image, in the format of https://accountname.blob.core.windows.net/container/image.vhd."
       }
     },
     "storageAccountKey": {
       "type": "securestring",
+      "defaultValue": "RBHhEl/sGNDaUK/jA48C7fqYrmf3gOKYpDGpXNN+cRKReQdoYHGZGxn3AZjK5DMNX85kyPM/FsA0MiSGn2PVSQ==",
       "metadata": {
         "description": "Storage Account key for accessing the base custom image."
       }
     },
     "adminUsername": {
       "type": "string",
+      "defaultValue": "azureuser",
       "metadata": {
         "description": "Admin username for the VMs in the deployment."
       }
     },
     "adminPassword": {
       "type": "securestring",
+      "defaultValue": "Gordon2015!",
       "metadata": {
         "description": "Admin password for the VMs in the deployment."
       }
