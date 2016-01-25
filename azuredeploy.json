@@ -11,7 +11,7 @@
     },
     "transferVMSize": {
       "type": "string",
-      "defaultValue": "Standard_D4",
+      "defaultValue": "Standard_D14",
       "allowedValues": [
         "Standard_D4",
         "Standard_D14"
