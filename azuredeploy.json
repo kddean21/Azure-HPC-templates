@@ -73,7 +73,7 @@
     },
     "imageLocation": {
       "type": "string",
-      "defaultValue": "https://cfdgroup2199.blob.core.windows.net/vhds/CFDBase-osDisk.598e0330-1259-4882-8ecb-f3a361aaf559.vhd",
+      "defaultValue": "https://cfdgroup2199.blob.core.windows.net/vhds/CFDBase-osDisk.2cd0bebc-f1ba-492a-83ee-8728b4b094b3.vhd",
       "metadata": {
         "description": "URL of the base custom image, in the format of https://accountname.blob.core.windows.net/container/image.vhd."
       }
