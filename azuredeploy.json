@@ -4,14 +4,14 @@
   "parameters": {
     "uniquePrefix": {
       "type": "string",
-      "defaultValue": "CFD",
+      "defaultValue": "cfd",
       "metadata": {
         "description": "This unique prefix will be used on all the objects created as part of this template."
       }
     },
     "transferVMSize": {
       "type": "string",
-      "defaultValue": "Standard_D14",
+      "defaultValue": "Standard_D4",
       "allowedValues": [
         "Standard_D4",
         "Standard_D14"
